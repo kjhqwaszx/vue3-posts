@@ -1,15 +1,11 @@
 <template>
-  <main>
-    <div class="container py-4">
-      <router-view></router-view>
-    </div>
-  </main>
+	<main>
+		<div class="container py-4">
+			<router-view></router-view>
+		</div>
+	</main>
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
