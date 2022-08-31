@@ -1,24 +1,28 @@
 <template>
-  <div>
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <router-link :to="{ name: 'nestedOne', replace:true}" class="nav-link" active-class="active">Nested One
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link :to="{name: 'nestedTwo', replace:true}" class="nav-link" active-class="active">Nested Two
-        </router-link>
-      </li>
-    </ul>
-    <hr class="my-4">
-    <router-view></router-view>
-  </div>
+	<div>
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+				<router-link
+					:to="{ name: 'nestedOne', replace: true }"
+					class="nav-link"
+					active-class="active"
+					>Nested One
+				</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link
+					:to="{ name: 'nestedTwo', replace: true }"
+					class="nav-link"
+					active-class="active"
+					>Nested Two
+				</router-link>
+			</li>
+		</ul>
+		<hr class="my-4" />
+		<router-view></router-view>
+	</div>
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

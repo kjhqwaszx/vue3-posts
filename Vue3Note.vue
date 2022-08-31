@@ -80,7 +80,7 @@ const goToAbout = () => router.push('/about');
 
  -->
 
- <!-- 
+<!-- 
   [ 중첩된 라우터 ( Nested )] _ router > index.js 에서 nested 보기
 
     - 헤더를 고정하고 하단에 <router-view></router-view>를 넣어 컴포넌트를 변경해주게 되는데
@@ -89,6 +89,30 @@ const goToAbout = () => router.push('/about');
     
     - 이 경우에 router > index.js 에서 children 속성으로 넣어주면 된다.
     - children 속성 중 path: ''인 부분은 부모로 들어왔을 때 <router-view/> 에 랜더링 되는 컴포넌트이다.  
+
+    [동적 라우팅 파라미터를 props로 전달하기 ]
+     1. props속성을 boolean으로 선언할 경우
+      - router > index.js 에서 props:true로 설정
+      path:'/주소/:id' 에서 id로 전달되는 파라미터를 해당 컴포넌트에 propsdata로 전달할 수 있다.
+
+      {
+        path: '/posts/:id',
+        name: 'PostDetail',
+        component: PostDetailView,
+        //props가 true 일 경우 url: ~/posts/3 로 접근할 경우 PostDetailView컴포넌트에 props데이터로 id가 3으로 넘어간다.
+        props: true
+      },
+         -> 해당 컴포넌트에서는 defindProps를 해주어야 한다.
+
+    2. props 속성을 함수로 선언할 경우
+     - 파라미터 여러개를 전달할 수 있다.
+     - router > index.js 에서 
+
+     props: (route) => ({          // route를 전달해야 한다.
+        id:parseInt(route.params.id),
+        key: route.params.value,
+        ...
+      })
 
  -->
 
