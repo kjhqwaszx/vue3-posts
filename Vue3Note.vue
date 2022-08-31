@@ -61,4 +61,16 @@ const goToAbout = () => router.push('/about');
   router.push({ path: '/register', query: { plan: 'private' } })
 -->
 
+<!-- 
+  [ 404 Not Found 처리]
+    - router > index.js 에
+     {
+        path: '/:pathMatch(.*)*', 
+        name: 'NotFound',
+        component: NotFoundView,
+      }
+    를 추가하고 컴포넌트를 만들어준다.
+
+ -->
+
 /* eslint-enable */
