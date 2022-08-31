@@ -116,4 +116,25 @@ const goToAbout = () => router.push('/about');
 
  -->
 
+ <!-- 
+  [ router history Mode ]
+    - Vue에서는 크게 history mode, hash mode를 사용하고 둘의 차이는 
+    화면 이동 시 url에 '#'이 붙는지 안붙는지 차이이다.
+    - npm run build를 통해 dist 배포 파일을 만들면 하나의 index.html, js, css, bootstrap 파일이 생성되는데
+    index.html 파일을 보게된다면 <body>태그에 <div id="#app"></div>만 붙어있는걸 확인할 수 있다.
+    #app 부분에는 js파일에 있는 내용들이 마운트 되면서 화면이 랜더링 되는 것인데
+    이처럼 하나의 페이지에서 보여지는 것이 SPA(Single Page Application) 이다.
+    
+    - hashMode를 사용할 경우 검색엔진 최적화에 단점이 있다.
+
+    - SSR(Server Side Rendering): 서버에서 화면에 보여질 페이지를 만들어 내려주는 것
+                                   화면 이동 시 깜빡인다.
+
+    - CSR(Client Side Rendering): 기존의 Vue와 같이 js에서 화면을 마운트 시켜주는 방식. 
+
+    * 운영서버에 배포를 할 때에는 dist폴더 내에 index.html 파일을 배포하게되는데
+     
+
+  -->
+
 /* eslint-enable */
