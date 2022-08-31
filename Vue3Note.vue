@@ -48,8 +48,10 @@ const goToAbout = () => router.push('/about');
     -->
 
 <!--  
-  [ 라우터 이동 ] _ PostListView.vue
-   -> router/index.js 파일에서
+  [ 라우터 이동 ( router.push ] _ PostListView.vue
+    - 라우터 이동 시 history항목에 기록한다. 뒤로가기를 했을경우 스택으로 빠짐 
+  
+  -> router/index.js 파일에서
 
   // path로 접근
   router.push(`/postDetail/1`)
@@ -59,6 +61,11 @@ const goToAbout = () => router.push('/about');
 
   // 쿼리와 함께 사용, 결과적으로 /register?plan=private가 됩니다.
   router.push({ path: '/register', query: { plan: 'private' } })
+
+  [ 라우터 이동 (router.replace) ] _ NestedView.vue 에서의 이동
+    - 라우터 이동 시 history 항목에 추가하지 않는다.
+    - router.push({path:'/home', replace:true})
+      router.replace({path:'/home'})
 -->
 
 <!-- 
@@ -70,6 +77,18 @@ const goToAbout = () => router.push('/about');
         component: NotFoundView,
       }
     를 추가하고 컴포넌트를 만들어준다.
+
+ -->
+
+ <!-- 
+  [ 중첩된 라우터 ( Nested )] _ router > index.js 에서 nested 보기
+
+    - 헤더를 고정하고 하단에 <router-view></router-view>를 넣어 컴포넌트를 변경해주게 되는데
+      특정 컴포넌트에서는 일정 부분을 고정하고 아래 부분만 다른 컴포넌트로 변경하고 싶을때
+      <router-view></router-view>를 넣어 변경할 수 있다. 이것을 중첩된 라우터라고 부른다.
+    
+    - 이 경우에 router > index.js 에서 children 속성으로 넣어주면 된다.
+    - children 속성 중 path: ''인 부분은 부모로 들어왔을 때 <router-view/> 에 랜더링 되는 컴포넌트이다.  
 
  -->
 

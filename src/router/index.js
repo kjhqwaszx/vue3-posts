@@ -6,6 +6,10 @@ import PostDetailView from '@/views/posts/PostDetailView.vue';
 import PostListView from '@/views/posts/PostListView.vue';
 import PostEditView from '@/views/posts/PostEditView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
+import NestedView from '@/views/nested/NestedView.vue';
+import NestedOneView from '@/views/nested/NestedOneView.vue';
+import NestedTwoView from '@/views/nested/NestedTwoView.vue';
+import NestedHomeView from '@/views/nested/NestedHomeView.vue';
 
 const routes = [
 	{
@@ -42,7 +46,32 @@ const routes = [
 		path: '/:pathMatch(.*)*',
 		name: 'NotFound',
 		component: NotFoundView,
+		
 	},
+	{
+		path: '/nested',
+		name: 'nested',
+		component: NestedView,
+		children:[
+			{
+				// '/nested'로 들어갔을 때 <router-view/>영역에 랜더링되는 페이지
+				path: '',
+				name: 'nestedHome',
+				component: NestedHomeView,
+			},
+			{
+				path: 'one',
+				name: 'nestedOne',
+				component: NestedOneView,
+			},
+			{
+				path: 'two',
+				name: 'nestedTwo',
+				component: NestedTwoView,
+			},
+		]
+	},
+	
 ];
 
 const router = createRouter({
