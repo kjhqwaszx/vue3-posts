@@ -79,7 +79,27 @@ const goToAbout = () => router.push('/about');
     를 추가하고 컴포넌트를 만들어준다.
 
  -->
+<!--
+    [ 구조분해 할당 ]
+      - 원하는 key 값만 받아오는 것을 의미한다. ( 말그대로 객체 구조를 원하는 key: value로 분해해서 할당하는 것)
+      - ref({})로 선언한 변수에 해 구조분해 할당을 할 수 있다.
+            
+           obj = {id:1, title:'vue3', price:100, createdAt:'2022-01-01'}
+           const data = ref({})
+           
+        -> 전부 가져오고 싶을 경우
+           data.value = {...obj}    // ...는 객체안의 key, value를 전부 풀어서 넣어준다. 
+                                    // 즉, {id:1, title:'vue3', price:100, createdAt:'2022-01-01'} 동일하게 부여된다.
+        -> 일부 key:value값만 갖고 싶을 경우
+        const setPost = ( {title, price} ) =>{
+          data.value.title = title
+          data.value.price = price
+        }
 
+        setPost(obj)
+      
+
+  -->
 <!-- 
   [ 중첩된 라우터 ( Nested )] _ router > index.js 에서 nested 보기
 
@@ -133,8 +153,40 @@ const goToAbout = () => router.push('/about');
     - CSR(Client Side Rendering): 기존의 Vue와 같이 js에서 화면을 마운트 시켜주는 방식. 
 
     * 운영서버에 배포를 할 때에는 dist폴더 내에 index.html 파일을 배포하게되는데
-     
 
   -->
+
+  <!--
+    [ axios ] _ CreateView, DetailView, EditView, ListView
+      - Vue에서 사용하는 API 통신 라이브러리 ( promise 객체를 반환한다.)
+      - 데이터를 조회해 오는 GET Method
+        -> axios.get('url',{
+          params:{
+            id:1
+          }
+        })
+      
+      - 데이터를 수정하는 POST Method
+        -> axios.post('url',{
+          id:1,
+          title: 'vue3'
+        })
+
+      - promise 객체를 리턴하기 때문에 .then.catch 로 사용할 수 있지만 async & await 으로 처리한다.
+
+      const fetchPosts = async () => {
+        const response = await getPosts()
+        
+        
+        // getPosts().then( (response)=>
+        // 	console.log(response.data)
+        // ).catch(error =>{
+        // 	console.log(error)
+        // });
+        
+      };
+    -->
+
+    
 
 /* eslint-enable */

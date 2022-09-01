@@ -30,8 +30,21 @@ import { getPosts } from '@/api/posts';
 import { useRouter } from 'vue-router';
 
 const posts = ref([]);
-const fetchPosts = () => {
-	posts.value = getPosts();
+
+const fetchPosts = async () => {
+	try {
+		const response = await getPosts()
+		posts.value = response.data
+	} catch (error) {
+		console.log(error)
+	}
+
+	// getPosts().then( (response)=>
+	// 	console.log(response.data)
+	// ).catch(error =>{
+	// 	console.log(error)
+	// });
+	
 };
 fetchPosts();
 
