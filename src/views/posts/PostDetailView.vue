@@ -52,7 +52,6 @@ const goEditPage = () =>
 		params: props.id,
 	});
 
-// ref 로 선언할 경우 아래와 같이 할당 가능
 const post = reactive({})
 
 const fetchPost = async () => {

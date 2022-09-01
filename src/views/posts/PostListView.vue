@@ -30,10 +30,14 @@ import { getPosts } from '@/api/posts';
 import { useRouter } from 'vue-router';
 
 const posts = ref([]);
+const params = ref({
+	_sort: 'createdAt',
+	_order: 'desc'
+})
 
 const fetchPosts = async () => {
 	try {
-		const response = await getPosts()
+		const response = await getPosts(params.value)
 		posts.value = response.data
 	} catch (error) {
 		console.log(error)
@@ -59,6 +63,8 @@ const goPage = id =>
 			id,
 		},
 	});
+
+
 </script>
 
 <style lang="scss" scoped></style>
