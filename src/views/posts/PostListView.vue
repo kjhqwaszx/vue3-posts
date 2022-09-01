@@ -1,6 +1,14 @@
 <template>
 	<div>
 		<h2>게시글 목록</h2>
+		<hr class="my-4">
+		<form @submit.prevent>
+			<div class="rowg-3">
+				<div class="col">
+					<input v-model="params.title_like" type=" text" class="form-control">
+				</div>
+			</div>
+		</form>
 		<hr class="my-4" />
 		<div class="row g-3">
 			<div v-for="post in posts" :key="post.id" class="col-4">
@@ -49,7 +57,8 @@ const params = ref({
 	_sort: 'createdAt',
 	_order: 'desc',
 	_limit:3,
-	_page:1
+	_page:1,
+	title_like:''
 })
 
 //pagination
