@@ -185,7 +185,18 @@ const goToAbout = () => router.push('/about');
         // });
         
       };
+
+
+    [ 모듈화하기 ] _ api > index.js
+      - 반복적으로 사용되는 url주소나, env에 따라 변경되는 url 주소를 관리하기 쉽게 모듈화 시킨다.
+      - axios.create() 를 사용하여 instance를 만들어 사용한다. 
     -->
+
+    <!-- 
+      [ pagination ]
+        - ListView 참고
+
+     -->
 
     
 

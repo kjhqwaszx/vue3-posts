@@ -12,7 +12,7 @@
 				<textarea v-model="form.content"  class="form-control" id="content" rows="3"></textarea>
 			</div>
 			<div class="pt-4">
-				<button type="button" class="btn btn-outline-danger me-2k" @click="goDetailPage">
+				<button type="button" class="btn btn-outline-danger me-2" @click="goDetailPage">
 					취소
 				</button>
 				<button class="btn btn-primary" @click="edit">수정</button>

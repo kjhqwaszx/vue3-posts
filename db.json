@@ -7,10 +7,10 @@
       "createdAt": "2022-01-01"
     },
     {
-      "id": 2,
-      "title": "제목2",
-      "content": "내용2",
-      "createdAt": "2022-01-02"
+      "title": "제목2 ##",
+      "contnet": null,
+      "content": "내용2 ##",
+      "id": 2
     },
     {
       "id": 3,
