@@ -23,6 +23,7 @@
 				</PostItem>
 			</div>
 		</div>
+		<!-- pagination -->
 		<nav class="mt-5" aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<li class="page-item">
@@ -43,7 +44,7 @@
 		</nav>
 		<hr class="my-5" />
 		<AppCard>
-			<PostDetailView id="3"> </PostDetailView>
+			<PostDetailView id="1"> </PostDetailView>
 		</AppCard>
 	</div>
 </template>
@@ -58,7 +59,6 @@ import { getPosts } from '@/api/posts';
 import { useRouter } from 'vue-router';
 
 const posts = ref([]);
-
  
 const params = ref({
 	_sort: 'createdAt',
@@ -79,6 +79,7 @@ const fetchPosts = async () => {
 
 		//totalCnt는 api 에서 Response Header에 담아준다.
 		totalCount.value = response.headers['x-total-count']
+		
 	} catch (error) {
 		console.log(error)
 	}
@@ -90,7 +91,7 @@ const fetchPosts = async () => {
 	// });
 	
 };
-// paging 처리를 위해 watchEffect 적용
+// paging 처리 및 filter, limit변경 감지를 위해 watchEffect 적용
 // 콜백함수인 fetchPosts에서 사용하는 값이 변경되면 fetchPosts를 호출한다.
 // 페이지 번호를 변경 할 경우 반응형 변수인 params(_page) 가 변경되었기 때문에 fetchPosts가 호출됨
 watchEffect(fetchPosts)

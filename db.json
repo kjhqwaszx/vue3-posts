@@ -8,7 +8,6 @@
     },
     {
       "title": "제목2 ##",
-      "contnet": null,
       "content": "내용2 ##",
       "id": 2
     },
@@ -56,9 +55,14 @@
     },
     {
       "title": "테스트 데이터",
-      "content": "테스트 데이터",
-      "createAt": 1662046112891,
+      "content": "테스트 데이터g",
       "id": 10
+    },
+    {
+      "title": "test1",
+      "content": "test",
+      "createAt": 1662223875520,
+      "id": 11
     }
   ],
   "profile": {
