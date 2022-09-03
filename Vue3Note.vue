@@ -195,8 +195,16 @@ const goToAbout = () => router.push('/about');
     <!-- 
       [ pagination ]
         - ListView 참고
-
      -->
+     <!-- 
+
+      [ env에 따른 BaseURL 설정 ]
+        - 서버를 실행시키면 vite.config.js파일에서 mode 옵션을 확인한다. (default는 development)
+        - mode와 일치하는 .env.모드이름 파일을 읽어 baseURL을 설정한다.
+        - 만약 설정한 mode와 일치하는 파일이 없을 경우에는 .env를 읽어 설정한다.
+        
+        - vite.config.js에서 mode를 production으로 변경해주면 .env.production 파일을 읽는다.
+      -->
 
     
 

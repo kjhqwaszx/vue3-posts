@@ -8,8 +8,8 @@ function create(baseURL,options){
   return instance
 }
 
-export const posts = create('http://localhost:5000/posts')
-
-// 다른 url을 사용한다고 하면
+// export const posts = create('http://localhost:5000/posts')
+export const posts = create(`${import.meta.env.VITE_APP_API_URL}posts`)
+// 위와 다른 url을 사용한다고 하면
 // export const 변수명 = create('url주소') 를 export 해주고
 // 사용하는 곳에서 import 해서 사용한다.
