@@ -2,21 +2,29 @@
 	<div>
 		<h2>게시글 수정</h2>
 		<hr class="my-4" />
-		<PostForm v-model:title="form.title" v-model:content="form.content" @submit.prevent>
+		<PostForm
+			v-model:title="form.title"
+			v-model:content="form.content"
+			@submit.prevent
+		>
 			<template #actions>
-					<button type="button" class="btn btn-outline-danger " @click="goDetailPage">
-						취소
-					</button>
-					<button class="btn btn-primary" @click="edit">수정</button>
+				<button
+					type="button"
+					class="btn btn-outline-danger"
+					@click="goDetailPage"
+				>
+					취소
+				</button>
+				<button class="btn btn-primary" @click="edit">수정</button>
 			</template>
 		</PostForm>
 	</div>
 </template>
 
 <script setup>
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getPostById, updatePost } from '@/api/posts'
+import { getPostById, updatePost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
 
 const route = useRoute();
@@ -31,37 +39,33 @@ const goDetailPage = () => {
 };
 
 const form = ref({
-	title:null,
-	contnet:null
-})
+	title: null,
+	contnet: null,
+});
 
 const fetchPost = async () => {
 	try {
 		const { data } = await getPostById(id);
-		setForm(data)	
+		setForm(data);
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
-	
 };
-const setForm = ({title, content})=>{
-	form.value.title = title
-	form.value.content = content
-}
+const setForm = ({ title, content }) => {
+	form.value.title = title;
+	form.value.content = content;
+};
 
 fetchPost();
 
-const edit = async() => {
+const edit = async () => {
 	try {
-		await updatePost(id,{...form.value})
-		router.push({ name: 'PostDetail', params:  {id} })
+		await updatePost(id, { ...form.value });
+		router.push({ name: 'PostDetail', params: { id } });
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
-
-	
-}
-
+};
 </script>
 
 <style lang="scss" scoped></style>

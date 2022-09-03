@@ -2,7 +2,7 @@
 	<AppCard>
 		<h5 class="card-title">{{ title }}</h5>
 		<p class="card-text">{{ content }}</p>
-		<p class="text-muted">{{  createdAt  }}</p>
+		<p class="text-muted">{{ createdAt }}</p>
 	</AppCard>
 </template>
 

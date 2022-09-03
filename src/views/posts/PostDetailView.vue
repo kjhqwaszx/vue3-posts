@@ -34,7 +34,7 @@ import { reactive } from 'vue';
 
 const props = defineProps({
 	id: {
-		type: [String, Number]
+		type: [String, Number],
 	},
 });
 const router = useRouter();
@@ -52,7 +52,7 @@ const goEditPage = () =>
 		params: props.id,
 	});
 
-const post = reactive({})
+const post = reactive({});
 
 const fetchPost = async () => {
 	try {
@@ -60,26 +60,24 @@ const fetchPost = async () => {
 
 		post.title = response.data.title;
 		post.content = response.data.content;
-		post.createdAt = response.data.createdAt;	
+		post.createdAt = response.data.createdAt;
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
-	
 };
 
 fetchPost();
 
-const remove = async () =>{
+const remove = async () => {
 	try {
-		if(confirm('삭제 하시겠습니까?')){
-			await deletePost(props.id)
-			router.push({ name: 'PostList' })
+		if (confirm('삭제 하시겠습니까?')) {
+			await deletePost(props.id);
+			router.push({ name: 'PostList' });
 		}
-		
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

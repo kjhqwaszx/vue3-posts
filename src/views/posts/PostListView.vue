@@ -1,11 +1,15 @@
 <template>
 	<div>
 		<h2>게시글 목록</h2>
-		<hr class="my-4">
+		<hr class="my-4" />
 		<form @submit.prevent>
 			<div class="row g-3">
 				<div class="col">
-					<input v-model="params.title_like" type=" text" class="form-control">
+					<input
+						v-model="params.title_like"
+						type=" text"
+						class="form-control"
+					/>
 				</div>
 				<div class="col-3">
 					<select class="form-select" v-model="params._limit">
@@ -19,13 +23,22 @@
 		<hr class="my-4" />
 		<div class="row g-3">
 			<div v-for="post in posts" :key="post.id" class="col-4">
-				<PostItem :title="post.title" :content="post.content" :created-at="post.createdAt" @click="goPage(post.id)">
+				<PostItem
+					:title="post.title"
+					:content="post.content"
+					:created-at="post.createdAt"
+					@click="goPage(post.id)"
+				>
 				</PostItem>
 			</div>
 		</div>
-		<AppPagination :current-page="params._page" :page-count="pageCount" @page="uptPage"></AppPagination>
-		
-		<template v-if="posts && posts.length >0">
+		<AppPagination
+			:current-page="params._page"
+			:page-count="pageCount"
+			@page="uptPage"
+		></AppPagination>
+
+		<template v-if="posts && posts.length > 0">
 			<hr class="my-5" />
 			<AppCard>
 				<PostDetailView :id="posts[0].id"> </PostDetailView>
@@ -45,29 +58,30 @@ import { getPosts } from '@/api/posts';
 import { useRouter } from 'vue-router';
 
 const posts = ref([]);
- 
+
 const params = ref({
 	_sort: 'createdAt',
 	_order: 'desc',
-	_limit:3,
-	_page:1,
-	title_like:''
-})
+	_limit: 3,
+	_page: 1,
+	title_like: '',
+});
 
 //pagination
-const totalCount = ref(0)
-const pageCount = computed(() => Math.ceil(totalCount.value / params.value._limit ))
+const totalCount = ref(0);
+const pageCount = computed(() =>
+	Math.ceil(totalCount.value / params.value._limit),
+);
 
 const fetchPosts = async () => {
 	try {
-		const response = await getPosts(params.value)
-		posts.value = response.data
+		const response = await getPosts(params.value);
+		posts.value = response.data;
 
 		//totalCnt는 api 에서 Response Header에 담아준다.
-		totalCount.value = response.headers['x-total-count']
-		
+		totalCount.value = response.headers['x-total-count'];
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
 
 	// getPosts().then( (response)=>
@@ -79,7 +93,7 @@ const fetchPosts = async () => {
 // paging 처리 및 filter, limit변경 감지를 위해 watchEffect 적용
 // 콜백함수인 fetchPosts에서 사용하는 값이 변경되면 fetchPosts를 호출한다.
 // 페이지 번호를 변경 할 경우 반응형 변수인 params(_page) 가 변경되었기 때문에 fetchPosts가 호출됨
-watchEffect(fetchPosts)
+watchEffect(fetchPosts);
 // fetchPosts();
 
 const router = useRouter();
@@ -94,13 +108,10 @@ const goPage = id =>
 		},
 	});
 
-const uptPage = (page) =>{
-	
-	params.value._page = page
-	console.log('## clicked', params.value._page)
-}
-
-
+const uptPage = page => {
+	params.value._page = page;
+	console.log('## clicked', params.value._page);
+};
 </script>
 
 <style lang="scss" scoped></style>

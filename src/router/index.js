@@ -38,7 +38,7 @@ const routes = [
 		component: PostDetailView,
 		// props가 true 일 경우 url: ~/posts/3 로 접근할 경우 PostDetailView컴포넌트에 props데이터로 id가 3으로 넘어간다.
 		// 해당컴포넌트에서는 defineProps를 선언해서 사용할 수 있다.
-		props: true
+		props: true,
 
 		// 함수형으로 선언
 		// props: route => ({ id: parseInt(route.params.id) }),

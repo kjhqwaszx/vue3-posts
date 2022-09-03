@@ -136,7 +136,7 @@ const goToAbout = () => router.push('/about');
 
  -->
 
- <!-- 
+<!-- 
   [ router history Mode ]
     - Vue에서는 크게 history mode, hash mode를 사용하고 둘의 차이는 
     화면 이동 시 url에 '#'이 붙는지 안붙는지 차이이다.
@@ -156,7 +156,7 @@ const goToAbout = () => router.push('/about');
 
   -->
 
-  <!--
+<!--
     [ axios ] _ CreateView, DetailView, EditView, ListView
       - Vue에서 사용하는 API 통신 라이브러리 ( promise 객체를 반환한다.)
       - 데이터를 조회해 오는 GET Method
@@ -192,11 +192,11 @@ const goToAbout = () => router.push('/about');
       - axios.create() 를 사용하여 instance를 만들어 사용한다. 
     -->
 
-    <!-- 
+<!-- 
       [ pagination ]
         - ListView 참고
      -->
-     <!-- 
+<!-- 
 
       [ env에 따른 BaseURL 설정 ]
         - 서버를 실행시키면 vite.config.js파일에서 mode 옵션을 확인한다. (default는 development)
@@ -205,7 +205,5 @@ const goToAbout = () => router.push('/about');
         
         - vite.config.js에서 mode를 production으로 변경해주면 .env.production 파일을 읽는다.
       -->
-
-    
 
 /* eslint-enable */
