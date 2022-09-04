@@ -55,7 +55,7 @@ const save = async () => {
 	try {
 		await createPost({
 			...form.value,
-			createAt: formatDate(Date.now()),
+			createdAt: formatDate(Date.now()),
 		});
 		router.push({ name: 'PostList' });
 	} catch (error) {

@@ -17,7 +17,7 @@ export function createPost(data) {
 
 export function updatePost(id, data) {
 	// id값이 Number로 들어오더라도 String 값으로 처리한다.
-	return posts.put(id, data);
+	return posts.patch(id, data);
 }
 
 export function deletePost(id) {

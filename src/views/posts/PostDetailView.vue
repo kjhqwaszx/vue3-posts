@@ -30,7 +30,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { getPostById, deletePost } from '@/api/posts';
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 
 const props = defineProps({
 	id: {
@@ -61,6 +61,7 @@ const fetchPost = async () => {
 		post.title = response.data.title;
 		post.content = response.data.content;
 		post.createdAt = response.data.createdAt;
+		console.log(JSON.stringify(post));
 	} catch (error) {
 		console.log(error);
 	}
