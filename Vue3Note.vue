@@ -238,6 +238,18 @@ const goToAbout = () => router.push('/about');
       자식컴포넌트에서 부모컴포넌트의 값을 핸들링 하려면 부모에서 v-model:foo1="bar1" 내려주고
       자식에서 :value 와 @input으로 사용해야 한다.
       즉, v-model = :value + @input
-
  -->
+
+<!--
+  [ tTransition 컴포넌트 ] _ alert
+    - Vue에서는 Transition 이나 Animation을 쉽게 할 수 있도록 도움을 주는 두가지 내장 컴포넌트를 제공한다.
+      * <Transition> : 컴포넌트가 DOM에 나타나고 사라질 대 애니메이션을 적용하기 위해 사용한다.
+        - 
+      * <TransitionGroup>: 컴포넌트가 v-for 목록에 삽입, 제거 또는 이동할 때 사용한다.
+    
+    
+    <Transition>
+      - 태그 내 v-if, v-show, <component>를 통한 동적 컴포넌트 때 트리거된다.
+      -->
+
 /* eslint-enable */

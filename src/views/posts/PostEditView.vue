@@ -82,6 +82,7 @@ const vAlert = (message, type) => {
 	showAlert.value = true;
 	alertMessage.value = message;
 	alretType.value = type;
+
 	setTimeout(() => {
 		showAlert.value = false;
 	}, 2000);
