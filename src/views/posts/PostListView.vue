@@ -18,12 +18,15 @@
 				</PostItem>
 			</template>
 		</AppGrid>
-		<PostModal
-			v-model="show"
-			:title="modalTitle"
-			:content="modalContent"
-			:createdAt="modalCreatedAt"
-		></PostModal>
+
+		<Teleport to="#modal">
+			<PostModal
+				v-model="show"
+				:title="modalTitle"
+				:content="modalContent"
+				:createdAt="modalCreatedAt"
+			></PostModal>
+		</Teleport>
 		<AppPagination
 			:current-page="params._page"
 			:page-count="pageCount"

@@ -263,4 +263,13 @@ const goToAbout = () => router.push('/about');
       - 태그 내 v-if, v-show, <component>를 통한 동적 컴포넌트 때 트리거된다.
       -->
 
+<!-- 
+  [ Teleport ] _ PostList.vue (PostModal 컴포넌트)
+    - PostModal 은 화면 위에 뜨는 것이기 때문에 계층 구조상 상위에 존재해야 한다.
+      하지만, PostList에서 import해서 호출당하기 때문에 계층 상 PostList 하위에 들어가 있다.
+      이렇게 된다면 css 등 충돌이 발생 할 수 있어 teleport를 사용해 해결해야 한다.
+
+    -Teleport는 특정 컴포넌트를 지정한 DOM위치로 이동시켜주는 Vue3용 내장 컴포넌트이다.
+
+ -->
 /* eslint-enable */
