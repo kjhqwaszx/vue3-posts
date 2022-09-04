@@ -207,7 +207,7 @@ const goToAbout = () => router.push('/about');
 -->
 
 <!-- 
-  [ 커스텀 v-model && 다중 v-model && :value, @input  ] _ PostList.vue, PostFilter.vue
+  [ 커스텀 컴포넌트의 v-model && 다중 v-model && :value, @input  ] _ PostList.vue, PostFilter.vue
     - 커스텀 모델은 자식 컴포넌트에서 부모로부터 받은 props 데이터를 핸들링 하기위해 사용한다.
     - 부모 컴포넌트에서 자식 컴포넌트에 v-model="propsData" 로 넘겨주면 자식컴포넌트는
       defineProps 영역에 modelValue를 선언하고(다중 v-model이 아닌 경우), defineEmits 영역에 update:propsData를 선언한다.
@@ -245,7 +245,7 @@ const goToAbout = () => router.push('/about');
 
       + 추가내용( 위와 같은 내용이지만 다시 정리 )
       
-      [커스텀 v-model] _ PostList.vue && AppModal.vue > 커밋 내용 확인
+      [커스텀 컴포넌트의 v-model] _ PostList.vue && AppModal.vue > 커밋 내용 확인
        - 자식컴포넌트에서 부모로 받은 props 데이터를 핸들링 하기위해서는 커스텀 v-model을 사용해야 한다.
        - 부모 컴포넌트에서 자식 컴포넌트에 v-model을 설정하고 자식 컴포넌트에서는 props로 ModelValue와 emit으로 update:ModelValue를 선언해야 한다.
 
