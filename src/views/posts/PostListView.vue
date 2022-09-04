@@ -13,6 +13,7 @@
 					:content="item.content"
 					:created-at="item.createdAt"
 					@click="goPage(item.id)"
+					@modal="openModal(item)"
 				>
 				</PostItem>
 			</template>
@@ -23,6 +24,29 @@
 			:page-count="pageCount"
 			@page="uptPage"
 		></AppPagination>
+
+		<AppModal :show="show" title="게시글" @close="closeModal">
+			<tempalte #default>
+				<div class="row g-3">
+					<div class="col-3">제목</div>
+					<div class="col-9">{{ modalTitle }}</div>
+					<div class="col-3">내용</div>
+					<div class="col-9">{{ modalContent }}</div>
+					<div class="col-3">등록일</div>
+					<div class="col-9">{{ modalCreatedAt }}</div>
+				</div>
+			</tempalte>
+			<template #actions>
+				<button
+					type="button"
+					@click="closeModal"
+					class="btn btn-secondary"
+					data-bs-dismiss="modal"
+				>
+					닫기
+				</button>
+			</template>
+		</AppModal>
 
 		<template v-if="posts && posts.length > 0">
 			<hr class="my-5" />
@@ -40,6 +64,7 @@ import AppCard from '@/components/AppCard.vue';
 import AppPagination from '@/components/AppPagination.vue';
 import AppGrid from '@/components/AppGrid.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
+import AppModal from '@/components/AppModal.vue';
 import { computed, ref, watchEffect } from 'vue';
 import { getPosts } from '@/api/posts';
 import { useRouter } from 'vue-router';
@@ -98,6 +123,23 @@ const goPage = id =>
 const uptPage = page => {
 	params.value._page = page;
 	console.log('## clicked', params.value._page);
+};
+
+//modal
+const show = ref(false);
+const modalTitle = ref('');
+const modalContent = ref('');
+const modalCreatedAt = ref('');
+
+const openModal = ({ title, content, createdAt }) => {
+	show.value = true;
+	modalTitle.value = title;
+	modalContent.value = content;
+	modalCreatedAt.value = createdAt;
+};
+
+const closeModal = () => {
+	show.value = false;
 };
 </script>
 
