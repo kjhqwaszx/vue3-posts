@@ -198,12 +198,46 @@ const goToAbout = () => router.push('/about');
      -->
 <!-- 
 
-      [ env에 따른 BaseURL 설정 ]
-        - 서버를 실행시키면 vite.config.js파일에서 mode 옵션을 확인한다. (default는 development)
-        - mode와 일치하는 .env.모드이름 파일을 읽어 baseURL을 설정한다.
-        - 만약 설정한 mode와 일치하는 파일이 없을 경우에는 .env를 읽어 설정한다.
-        
-        - vite.config.js에서 mode를 production으로 변경해주면 .env.production 파일을 읽는다.
-      -->
+    [ env에 따른 BaseURL 설정 ]
+      - 서버를 실행시키면 vite.config.js파일에서 mode 옵션을 확인한다. (default는 development)
+      - mode와 일치하는 .env.모드이름 파일을 읽어 baseURL을 설정한다.
+      - 만약 설정한 mode와 일치하는 파일이 없을 경우에는 .env를 읽어 설정한다.
+      
+      - vite.config.js에서 mode를 production으로 변경해주면 .env.production 파일을 읽는다.
+-->
 
+<!-- 
+  [ 다중 v-model && :value, @input  ] _ PostList.vue, PostFilter.vue
+    - 기본적으로 컴포넌트 상의 v-model은 modelValue(foo1, foo2)를 props처럼, update:modelVauel를 이벤트처럼 사용한다.
+     Parent: <my-component v-model:foo1="bar1" v-model:foo2 ="bar2"></my-component>  의 경우
+     자식컴포넌트는 foo를 prop으로 사용하고 동기화 이벤트에 대해서는 update:foo를 emit하도록 상정한다.
+
+     <MyComponent.vue> - Child
+
+      <template>
+        <input
+          type="text"
+          :value="foo"
+          @input="$emit('update:foo', $event.target.value)"
+        />
+      </template>
+
+      <script setup>
+        definePorps({
+          foo1:{
+            type: String
+          },
+          foo2:{
+            type: Stinrg
+          }
+        })
+        defineEmits(['update:foo'])
+      </script>
+
+      자식 컴포넌트가 부모컴포넌트의 데이터를 v-model로 사용할 경우에 에러가 발생한다.
+      자식컴포넌트에서 부모컴포넌트의 값을 핸들링 하려면 부모에서 v-model:foo1="bar1" 내려주고
+      자식에서 :value 와 @input으로 사용해야 한다.
+      즉, v-model = :value + @input
+
+ -->
 /* eslint-enable */
