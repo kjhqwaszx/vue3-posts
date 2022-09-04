@@ -18,11 +18,12 @@
 				<button class="btn btn-primary" @click="edit">수정</button>
 			</template>
 		</PostForm>
-		<AppAlert
+		<!-- <AppAlert
 			:show="showAlert"
 			:message="alertMessage"
 			:type="alretType"
-		></AppAlert>
+		></AppAlert> -->
+		<AppAlert :items="alerts"> </AppAlert>
 	</div>
 </template>
 
@@ -71,20 +72,25 @@ const edit = async () => {
 		// router.push({ name: 'PostDetail', params: { id } });
 	} catch (error) {
 		console.log(error);
+		vAlert('error.message', 'error');
 	}
 };
 //alert
-const showAlert = ref(false);
-const alertMessage = ref('');
-const alretType = ref('error');
+
+// const showAlert = ref(false);
+// const alertMessage = ref('');
+// const alretType = ref('error');
+const alerts = ref([]);
 
 const vAlert = (message, type) => {
-	showAlert.value = true;
-	alertMessage.value = message;
-	alretType.value = type;
+	alerts.value.push({ message, type });
+	// showAlert.value = true;
+	// alertMessage.value = message;
+	// alretType.value = type;
 
 	setTimeout(() => {
-		showAlert.value = false;
+		// showAlert.value = false;
+		alerts.value.shift();
 	}, 2000);
 };
 </script>
