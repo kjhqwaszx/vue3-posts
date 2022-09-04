@@ -25,7 +25,7 @@
 			@page="uptPage"
 		></AppPagination>
 
-		<AppModal :show="show" title="게시글" @close="closeModal">
+		<AppModal v-model="show" title="게시글">
 			<tempalte #default>
 				<div class="row g-3">
 					<div class="col-3">제목</div>

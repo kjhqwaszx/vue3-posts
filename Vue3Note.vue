@@ -207,10 +207,14 @@ const goToAbout = () => router.push('/about');
 -->
 
 <!-- 
-  [ 다중 v-model && :value, @input  ] _ PostList.vue, PostFilter.vue
-    - 기본적으로 컴포넌트 상의 v-model은 modelValue(foo1, foo2)를 props처럼, update:modelVauel를 이벤트처럼 사용한다.
-     Parent: <my-component v-model:foo1="bar1" v-model:foo2 ="bar2"></my-component>  의 경우
-     자식컴포넌트는 foo를 prop으로 사용하고 동기화 이벤트에 대해서는 update:foo를 emit하도록 상정한다.
+  [ 커스텀 v-model && 다중 v-model && :value, @input  ] _ PostList.vue, PostFilter.vue
+    - 커스텀 모델은 자식 컴포넌트에서 부모로부터 받은 props 데이터를 핸들링 하기위해 사용한다.
+    - 부모 컴포넌트에서 자식 컴포넌트에 v-model="propsData" 로 넘겨주면 자식컴포넌트는
+      defineProps 영역에 modelValue를 선언하고(다중 v-model이 아닌 경우), defineEmits 영역에 update:propsData를 선언한다.
+    - 주로 input 태그에서 :value부분에 propsData를 사용해 노출하고 @input에 emit을 실행해 값을 핸들링 한다
+
+    - 여러개의 props 내려 줄 경우 다중 v-model을 사용하며 v-model:변수명 ="propsData" 를 사용하고
+      자식 컴포넌트에서는 defineProps 영역에 변수명을 선언해 사용한다. 
 
      <MyComponent.vue> - Child
 
@@ -238,6 +242,13 @@ const goToAbout = () => router.push('/about');
       자식컴포넌트에서 부모컴포넌트의 값을 핸들링 하려면 부모에서 v-model:foo1="bar1" 내려주고
       자식에서 :value 와 @input으로 사용해야 한다.
       즉, v-model = :value + @input
+
+      + 추가내용( 위와 같은 내용이지만 다시 정리 )
+      
+      [커스텀 v-model] _ PostList.vue && AppModal.vue > 커밋 내용 확인
+       - 자식컴포넌트에서 부모로 받은 props 데이터를 핸들링 하기위해서는 커스텀 v-model을 사용해야 한다.
+       - 부모 컴포넌트에서 자식 컴포넌트에 v-model을 설정하고 자식 컴포넌트에서는 props로 ModelValue와 emit으로 update:ModelValue를 선언해야 한다.
+
  -->
 
 <!--
