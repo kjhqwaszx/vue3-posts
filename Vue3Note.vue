@@ -272,4 +272,19 @@ const goToAbout = () => router.push('/about');
     -Teleport는 특정 컴포넌트를 지정한 DOM위치로 이동시켜주는 Vue3용 내장 컴포넌트이다.
 
  -->
+
+<!-- 
+  [ plugins ] _ plugins
+    - 플러그인은 일반적으로 Vue에 전역 수준의 기능을 추가할 때 사용하는 기능을 말한다.
+      예를들면 router, route와 같은 기능들
+    - 플러그인은 크게 객체(obj.js)로 정의하는 방법과 함수로 정의하는 방법(func.js)이 있다.
+
+    - person.js는 객체로 선언한 케이스
+       * 객체로 선언 할 경우 install(app, options)함수를 사용해야 하고 Vue 인스턴스인 app과 options 를 파라미터로 받는다
+        1.app.component()를 활용해서 전역 컴포넌트 만들기
+        2.app.config.globalProperties 를 사용해 전역 애플리케이션 이스턴스에 속성을 추가할 수 있다.
+        3.app.directive 를 사용해 커스텀 티렉티브를 설정할 수 있다.
+        4.app.provide를 사용해 리소스들을 자식 컴포넌트에서 사용할 수 있도록 해준다.
+
+  -->
 /* eslint-enable */
