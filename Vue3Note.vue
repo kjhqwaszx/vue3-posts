@@ -286,5 +286,9 @@ const goToAbout = () => router.push('/about');
         3.app.directive 를 사용해 커스텀 티렉티브를 설정할 수 있다.
         4.app.provide를 사용해 리소스들을 자식 컴포넌트에서 사용할 수 있도록 해준다.
 
+  app.directive 실습 : directives 폴더
+  app.provide && app.config.globalProperties 실습 : plugins > person.js
+  app.component 실습 : plgins > global-components.js
+
   -->
 /* eslint-enable */
