@@ -8,6 +8,7 @@ import objPlugins from '@/plugins/obj';
 import person from '@/plugins/person';
 import globalComponents from '@/plugins/global-components';
 import focus from '@/directives/focus';
+import dayjs from '@/plugins/dayjs';
 
 const app = createApp(App);
 // app.use(funcPlugins);
@@ -21,6 +22,8 @@ app.use(globalComponents);
 // global 디렉티브 등록
 app.directive('focus', focus);
 
+//dayjs 플러그인 사용 ( 라이브러리를 플러그인으로 만들어 사용)
+app.use(dayjs);
 app.use(router).mount('#app');
 
 import 'bootstrap/dist/js/bootstrap.js';

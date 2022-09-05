@@ -7,7 +7,9 @@
 				<div class="col-3">내용</div>
 				<div class="col-9">{{ content }}</div>
 				<div class="col-3">등록일</div>
-				<div class="col-9">{{ createdAt }}</div>
+				<div class="col-9">
+					{{ $dayjs(createdAt).format('YYYY.MM.DD HH:mm:ss') }}
+				</div>
 			</div>
 		</tempalte>
 		<template #actions>
