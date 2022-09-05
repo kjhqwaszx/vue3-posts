@@ -14,8 +14,6 @@
 </template>
 
 <script setup>
-import AppCard from '@/components/AppCard.vue';
-
 const props = defineProps({
 	title: {
 		type: String,
