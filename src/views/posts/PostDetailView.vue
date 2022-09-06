@@ -48,9 +48,10 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
-import { getPostById, deletePost } from '@/api/posts';
-import { computed, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { deletePost } from '@/api/posts';
+import { ref } from 'vue';
+import { useAxios } from '@/composables/useAxios';
 
 const props = defineProps({
 	id: {
@@ -60,10 +61,31 @@ const props = defineProps({
 const router = useRouter();
 // const route = useRoute();
 // const id = route.params.id;
-const error = ref(null);
-const loading = ref(false);
 const removeError = ref(null);
 const removeLoading = ref(false);
+
+const { data: post, error, loading } = useAxios(`/posts/${props.id}`);
+
+// const post = reactive({});
+// const error = ref(null);
+// const loading = ref(false);
+// const fetchPost = async () => {
+// 	try {
+// 		loading.value = true;
+// 		const response = await getPostById(props.id);
+
+// 		post.title = response.data.title;
+// 		post.content = response.data.content;
+// 		post.createdAt = response.data.createdAt;
+// 		console.log(JSON.stringify(post));
+// 	} catch (err) {
+// 		error.value = err.message;
+// 	} finally {
+// 		loading.value = false;
+// 	}
+// };
+
+// fetchPost();
 
 const goListPage = () =>
 	router.push({
@@ -75,26 +97,6 @@ const goEditPage = () =>
 		name: 'PostEdit',
 		params: props.id,
 	});
-
-const post = reactive({});
-
-const fetchPost = async () => {
-	try {
-		loading.value = true;
-		const response = await getPostById(props.id);
-
-		post.title = response.data.title;
-		post.content = response.data.content;
-		post.createdAt = response.data.createdAt;
-		console.log(JSON.stringify(post));
-	} catch (err) {
-		error.value = err.message;
-	} finally {
-		loading.value = false;
-	}
-};
-
-fetchPost();
 
 const remove = async () => {
 	try {

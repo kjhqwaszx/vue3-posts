@@ -49,6 +49,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { getPostById, updatePost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
 import { useAlert } from '@/composables/alert';
+import { useAxios } from '@/composables/useAxios';
 
 //Composable 함수 선언
 const { vAlert, vSuccess } = useAlert();
@@ -57,10 +58,35 @@ const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
 
-const error = ref(null);
-const loading = ref(false);
 const editError = ref(null);
 const editLoading = ref(false);
+
+const { data: form, error, loading } = useAxios(`/posts/${id}`);
+
+// const form = ref({
+// 	title: null,
+// 	contnet: null,
+// });
+// const error = ref(null);
+// const loading = ref(false);
+// const fetchPost = async () => {
+// 	try {
+// 		loading.value = true;
+// 		const { data } = await getPostById(id);
+// 		setForm(data);
+// 	} catch (err) {
+// 		error.value = err.message;
+// 		vAlert('네트워크 오류', 'error');
+// 	} finally {
+// 		loading.value = false;
+// 	}
+// };
+// const setForm = ({ title, content }) => {
+// 	form.value.title = title;
+// 	form.value.content = content;
+// };
+
+// fetchPost();
 
 const goDetailPage = () => {
 	router.push({
@@ -68,30 +94,6 @@ const goDetailPage = () => {
 		params: { id },
 	});
 };
-
-const form = ref({
-	title: null,
-	contnet: null,
-});
-
-const fetchPost = async () => {
-	try {
-		loading.value = true;
-		const { data } = await getPostById(id);
-		setForm(data);
-	} catch (err) {
-		error.value = err.message;
-		vAlert('네트워크 오류', 'error');
-	} finally {
-		loading.value = false;
-	}
-};
-const setForm = ({ title, content }) => {
-	form.value.title = title;
-	form.value.content = content;
-};
-
-fetchPost();
 
 const edit = async () => {
 	try {
