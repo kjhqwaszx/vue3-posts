@@ -294,7 +294,9 @@ const goToAbout = () => router.push('/about');
 
 <!-- 
     [ Composable 함수 ]
-      - Composable은 Vue Composition API를 활용하여 상태 저장 비즈니스 로직을 캡슐화하고 재사용하는 기능이다.
-      - PostEditView에서 alert을 띄워주는 부분은 다른 곳에서 재사용 될 수 있으니 Composable 함수로 만들어본다.
+      - Composable은 Vue Composition API를 활용하여 상태(pinia 및 ref, reactive 변수) 저장 비즈니스 로직을 캡슐화하고 재사용하는 기능이다.
+      - (실습) PostEditView에서 alert을 띄워주는 부분은 다른 곳에서 재사용 될 수 있으니 Composable 함수로 만들어본다.
+         -> composables > alert.js
+      - (실습) 모든 컴포넌트에서 데이터를 성공적으로 불러오면 AppGrid를 보여주고 실패 시 Error, 데이터 지연 시 Loading을 보여준다.
    -->
 /* eslint-enable */

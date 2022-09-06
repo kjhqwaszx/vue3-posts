@@ -1,11 +1,15 @@
 <template>
-	<div>
+	<AppLoading v-if="loading"></AppLoading>
+	<AppError v-else-if="error" :message="error.message"></AppError>
+
+	<div v-else>
 		<h2>{{ post.title }}</h2>
 		<p>{{ post.content }}</p>
 		<p class="text-mued">
 			{{ $dayjs(post.createdAt).format('YYYY.MM.DD HH:mm:ss') }}
 		</p>
 		<hr class="my-4" />
+		<AppError v-if="removeError" :message="removeError"></AppError>
 		<div class="row g-2">
 			<div class="col-auto">
 				<button class="btn btn-outline-dark">이전글</button>
@@ -23,7 +27,21 @@
 				</button>
 			</div>
 			<div class="col-auto">
-				<button class="btn btn-outline-danger" @click="remove">삭제</button>
+				<button
+					class="btn btn-primary"
+					@click="remove"
+					:disabled="removeLoading"
+				>
+					<template v-if="removeLoading">
+						<span
+							class="spinner-grow spinner-grow-sm"
+							role="status"
+							aria-hidden="true"
+						></span>
+						<span class="visually-hidden">Loading...</span>
+					</template>
+					<template v-else>삭제</template>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -32,7 +50,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { getPostById, deletePost } from '@/api/posts';
-import { computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 const props = defineProps({
 	id: {
@@ -42,6 +60,10 @@ const props = defineProps({
 const router = useRouter();
 // const route = useRoute();
 // const id = route.params.id;
+const error = ref(null);
+const loading = ref(false);
+const removeError = ref(null);
+const removeLoading = ref(false);
 
 const goListPage = () =>
 	router.push({
@@ -58,14 +80,17 @@ const post = reactive({});
 
 const fetchPost = async () => {
 	try {
+		loading.value = true;
 		const response = await getPostById(props.id);
 
 		post.title = response.data.title;
 		post.content = response.data.content;
 		post.createdAt = response.data.createdAt;
 		console.log(JSON.stringify(post));
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		error.value = err.message;
+	} finally {
+		loading.value = false;
 	}
 };
 
@@ -74,11 +99,15 @@ fetchPost();
 const remove = async () => {
 	try {
 		if (confirm('삭제 하시겠습니까?')) {
+			removeLoading.value = true;
+
 			await deletePost(props.id);
 			router.push({ name: 'PostList' });
 		}
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		removeError.value = err.message;
+	} finally {
+		removeLoading.value = false;
 	}
 };
 </script>

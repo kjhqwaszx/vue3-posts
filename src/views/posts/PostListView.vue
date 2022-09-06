@@ -6,18 +6,29 @@
 		</PostFilter>
 		<hr class="my-4" />
 
-		<AppGrid :items="posts">
-			<template v-slot="{ item }">
-				<PostItem
-					:title="item.title"
-					:content="item.content"
-					:created-at="item.createdAt"
-					@click="goPage(item.id)"
-					@modal="openModal(item)"
-				>
-				</PostItem>
-			</template>
-		</AppGrid>
+		<AppLoading v-if="loading"></AppLoading>
+		<AppError v-else-if="error" :message="error.message"></AppError>
+
+		<template v-else>
+			<AppGrid :items="posts">
+				<template v-slot="{ item }">
+					<PostItem
+						:title="item.title"
+						:content="item.content"
+						:created-at="item.createdAt"
+						@click="goPage(item.id)"
+						@modal="openModal(item)"
+					>
+					</PostItem>
+				</template>
+			</AppGrid>
+
+			<AppPagination
+				:current-page="params._page"
+				:page-count="pageCount"
+				@page="uptPage"
+			></AppPagination>
+		</template>
 
 		<Teleport to="#modal">
 			<PostModal
@@ -27,11 +38,6 @@
 				:createdAt="modalCreatedAt"
 			></PostModal>
 		</Teleport>
-		<AppPagination
-			:current-page="params._page"
-			:page-count="pageCount"
-			@page="uptPage"
-		></AppPagination>
 
 		<template v-if="posts && posts.length > 0">
 			<hr class="my-5" />
@@ -47,6 +53,8 @@ import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
 import PostModal from '@/components/posts/PostModal.vue';
+import AppLoading from '@/components/app/AppLoading.vue';
+import AppError from '@/components/app/AppError.vue';
 
 import { computed, ref, watchEffect } from 'vue';
 import { getPosts } from '@/api/posts';
@@ -62,6 +70,8 @@ const params = ref({
 	title_like: '',
 });
 
+const error = ref(null);
+const loading = ref(false);
 //pagination
 const totalCount = ref(0);
 const pageCount = computed(() =>
@@ -70,13 +80,16 @@ const pageCount = computed(() =>
 
 const fetchPosts = async () => {
 	try {
+		loading.value = true;
 		const response = await getPosts(params.value);
 		posts.value = response.data;
 
 		//totalCnt는 api 에서 Response Header에 담아준다.
 		totalCount.value = response.headers['x-total-count'];
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 
 	// getPosts().then( (response)=>
