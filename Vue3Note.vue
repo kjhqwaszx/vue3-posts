@@ -291,4 +291,10 @@ const goToAbout = () => router.push('/about');
   app.component 실습 : plgins > global-components.js
 
   -->
+
+<!-- 
+    [ Composable 함수 ]
+      - Composable은 Vue Composition API를 활용하여 상태 저장 비즈니스 로직을 캡슐화하고 재사용하는 기능이다.
+      - PostEditView에서 alert을 띄워주는 부분은 다른 곳에서 재사용 될 수 있으니 Composable 함수로 만들어본다.
+   -->
 /* eslint-enable */

@@ -26,6 +26,10 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { createPost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
+import { useAlert } from '@/composables/alert';
+
+//사용할 Composable 함수 선언
+const { vAlert, vSuccess } = useAlert();
 
 const router = useRouter();
 
@@ -58,10 +62,13 @@ const save = async () => {
 			createdAt: formatDate(Date.now()),
 		});
 		router.push({ name: 'PostList' });
+		vSuccess('등록이 완료되었습니다.');
 	} catch (error) {
-		console.log(error);
+		vAlert(error.message);
 	}
 };
+
+//alert
 </script>
 
 <style lang="scss" scoped></style>

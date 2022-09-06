@@ -23,7 +23,6 @@
 			:message="alertMessage"
 			:type="alretType"
 		></AppAlert> -->
-		<AppAlert :items="alerts"> </AppAlert>
 	</div>
 </template>
 
@@ -32,6 +31,11 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getPostById, updatePost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
+import { useAlert } from '@/composables/alert';
+
+//Composable 함수 선언
+const { vAlert, vSuccess } = useAlert();
+
 const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
@@ -67,31 +71,14 @@ fetchPost();
 const edit = async () => {
 	try {
 		await updatePost(id, { ...form.value });
-		vAlert('수정이 완료되었습니다.', 'success');
-		// router.push({ name: 'PostDetail', params: { id } });
+		vSuccess('수정이 완료되었습니다.');
+		router.push({ name: 'PostDetail', params: { id } });
 	} catch (error) {
 		console.log(error);
 		vAlert('error.message', 'error');
 	}
 };
 //alert
-
-// const showAlert = ref(false);
-// const alertMessage = ref('');
-// const alretType = ref('error');
-const alerts = ref([]);
-
-const vAlert = (message, type) => {
-	alerts.value.push({ message, type });
-	// showAlert.value = true;
-	// alertMessage.value = message;
-	// alretType.value = type;
-
-	setTimeout(() => {
-		// showAlert.value = false;
-		alerts.value.shift();
-	}, 2000);
-};
 </script>
 
 <style lang="scss" scoped></style>
