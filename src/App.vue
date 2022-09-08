@@ -2,8 +2,6 @@
 import TheHeader from '@/layouts/TheHeader.vue';
 import TheView from './layouts/TheView.vue';
 import AppAlert from '@/components/app/AppAlert.vue';
-import { useAlert } from '@/composables/alert';
-const { alerts } = useAlert();
 </script>
 
 <template>
@@ -14,7 +12,7 @@ const { alerts } = useAlert();
 		 수정/등록 후 해당 컴포넌트들이 닫히고 list 컴포넌트로 router이동하므로 AppAlert 컴포넌트가 사라져
 		 alert이 생성되지 않는다. 
 	-->
-	<AppAlert :items="alerts"> </AppAlert>
+	<AppAlert> </AppAlert>
 </template>
 
 <style></style>

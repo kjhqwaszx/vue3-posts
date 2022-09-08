@@ -1,6 +1,6 @@
 <template>
 	<AppModal v-model="show" title="게시글">
-		<tempalte #default>
+		<template #default>
 			<div class="row g-3">
 				<div class="col-3">제목</div>
 				<div class="col-9">{{ title }}</div>
@@ -11,7 +11,7 @@
 					{{ $dayjs(createdAt).format('YYYY.MM.DD HH:mm:ss') }}
 				</div>
 			</div>
-		</tempalte>
+		</template>
 		<template #actions>
 			<button
 				type="button"
