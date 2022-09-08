@@ -299,4 +299,18 @@ const goToAbout = () => router.push('/about');
          -> composables > alert.js
       - (실습) 모든 컴포넌트에서 데이터를 성공적으로 불러오면 AppGrid를 보여주고 실패 시 Error, 데이터 지연 시 Loading을 보여준다.
    -->
+
+<!-- 
+    [ toRef & toRefs]
+      < toRef > - 속성 하나하나를 변환
+        -> const 변수 = toRef(반응형객체, 속성명)
+        const position = reactive({ x: 100, y:1000})
+        const x = toRef(positon,'x')
+        const y = toRef(positon,'y')
+
+      < toRefs(반응형객체) > - 구조분해 할당으로 여러 속성을 한번에 변환
+        -> const {변수1, 변수2} = toRefs(반응형객체)
+        const position = reactive({ x: 100, y:1000})
+        const {x,y} = toRefs(position)
+  -->
 /* eslint-enable */

@@ -13,6 +13,10 @@
 	<hr class="my-4" />
 	<!-- template로 접근 시 아래와 같이 사용 -->
 	<h2>{{ $person.name }}</h2>
+
+	<hr class="my4" />
+	<h2>{{ position }}</h2>
+	<h2>x : {{ position.x }} y: {{ position.y }}</h2>
 </template>
 
 <script>
@@ -28,7 +32,7 @@ export default {
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { inject, ref } from 'vue';
+import { inject, reactive, ref, toRef, toRefs } from 'vue';
 
 const router = useRouter();
 const goToAbout = () => router.push('/about');
@@ -38,4 +42,14 @@ const items = ref(['사과', '딸기', '포도', '바나나']);
 const person = inject(['person']);
 console.log('person.name: ', person.name);
 // person.say();
+
+// toRefs 실습
+const position = reactive({
+	x: 100,
+	y: 1000,
+});
+
+// const x = toRef(position, 'x');
+// const y = toRef(position, 'y');
+const { x, y } = toRefs(position);
 </script>
