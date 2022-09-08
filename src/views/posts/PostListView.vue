@@ -2,15 +2,18 @@
 	<div>
 		<h2>게시글 목록</h2>
 		<hr class="my-4" />
-		<PostFilter v-model:title="params.title_like" v-model:limit="params._limit">
+		<PostFilter v-model:title="params.title_like" @update:limit="changeLimit">
 		</PostFilter>
 		<hr class="my-4" />
 
 		<AppLoading v-if="loading"></AppLoading>
 		<AppError v-else-if="error" :message="error.message"></AppError>
 
+		<template v-else-if="!isExist">
+			<p class="text-center py-5 text-muted">No Results</p>
+		</template>
 		<template v-else>
-			<AppGrid :items="posts">
+			<AppGrid :items="posts" col-class="col-12 col-md-6 col-lg-4">
 				<template v-slot="{ item }">
 					<PostItem
 						:title="item.title"
@@ -38,13 +41,6 @@
 				:createdAt="modalCreatedAt"
 			></PostModal>
 		</Teleport>
-
-		<template v-if="posts && posts.length > 0">
-			<hr class="my-5" />
-			<AppCard>
-				<PostDetailView :id="posts[0].id"> </PostDetailView>
-			</AppCard>
-		</template>
 	</div>
 </template>
 
@@ -69,6 +65,11 @@ const params = ref({
 	title_like: '',
 });
 
+const changeLimit = value => {
+	params.value._limit = value;
+	params.value._page = 1;
+};
+
 // data: posts는 구조분해 할당 해서 받아온 data값을 posts 라는 리액티브 변수로 사용한다는 뜻
 const {
 	response,
@@ -77,6 +78,7 @@ const {
 	loading,
 } = useAxios('/posts', { params }); // default method는 get이므로 넘기지 않아도 된다.
 
+const isExist = computed(() => posts.value && posts.value.length > 0);
 //pagination
 const totalCount = computed(() => response.value.headers['x-total-count']);
 const pageCount = computed(() =>
