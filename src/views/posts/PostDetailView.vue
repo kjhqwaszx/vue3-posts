@@ -12,10 +12,14 @@
 		<AppError v-if="removeError" :message="removeError"></AppError>
 		<div class="row g-2">
 			<div class="col-auto">
-				<button class="btn btn-outline-dark">이전글</button>
+				<button class="btn btn-outline-dark" @click="$router.push('/posts/15')">
+					이전글
+				</button>
 			</div>
 			<div class="col-auto">
-				<button class="btn btn-outline-dark">다음글</button>
+				<button class="btn btn-outline-dark" @click="$router.push('/posts/16')">
+					다음글
+				</button>
 			</div>
 			<div class="col-auto me-auto"></div>
 			<div class="col-auto">
@@ -48,7 +52,7 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { onBeforeRouteLeave, onBeforeRouteUpdate, useRouter } from 'vue-router';
 import { deletePost } from '@/api/posts';
 import { ref } from 'vue';
 import { useAxios } from '@/composables/useAxios';
@@ -112,6 +116,16 @@ const remove = async () => {
 		removeLoading.value = false;
 	}
 };
+
+//컴포넌트 내 라우터 사용
+
+onBeforeRouteUpdate(() => {
+	console.log('onBeforeRouteUpdate');
+});
+
+onBeforeRouteLeave(() => {
+	console.log('onBeforeRouteLeave');
+});
 </script>
 
 <style lang="scss" scoped></style>

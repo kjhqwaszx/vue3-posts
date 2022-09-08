@@ -10,6 +10,7 @@ import NestedView from '@/views/nested/NestedView.vue';
 import NestedOneView from '@/views/nested/NestedOneView.vue';
 import NestedTwoView from '@/views/nested/NestedTwoView.vue';
 import NestedHomeView from '@/views/nested/NestedHomeView.vue';
+import MyPage from '@/views/MyPage.vue';
 
 const routes = [
 	{
@@ -76,11 +77,45 @@ const routes = [
 			},
 		],
 	},
+	// {
+	// 	path: '/my',
+	// 	name: 'MyPage',
+	// 	component: MyPage,
+	// 	beforeEnter: (to, from) => {
+	// 		console.log('to: ', to);
+	// 		console.log('from: ', from);
+	// 		// return false; //  -> 이동을 하지 않는다.
+	// 		return { name: 'Home' };
+	// 	},
+	// },
+
+	// 배열로 규칙 추가 가능
+	{
+		path: '/my',
+		name: 'MyPage',
+		component: MyPage,
+		beforeEnter: [removeQueryString],
+	},
 ];
+
+function removeQueryString(to) {
+	if (Object.keys(to.query).length > 0)
+		// 쿼리스트링은 to.query에 들어있고 값이 있다면 Object.keys를 통해 배열로 반환한다.
+		return { path: to.path, query: {} };
+}
 
 const router = createRouter({
 	history: createWebHistory('/'),
 	routes,
 });
+
+//전역가드
+// router.beforeEach((to, from) => { // ->  라우터 이동시 무조건 실행된다.
+// 	if (to.name === 'MyPage') {
+//     console.log('page Changed')
+// 		// return false;   // -> 이동을 하지 않는다.
+// 		return { name: 'Home' };   // -> home으로 리다이렉션 한다.
+// 	}
+// });
 
 export default router;

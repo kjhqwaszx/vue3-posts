@@ -2,7 +2,7 @@
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">KYOBO CODING</a>
+				<router-link class="navbar-brand" to="/">KYOBO CODING</router-link>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -34,6 +34,11 @@
 						<li class="nav-item">
 							<router-link to="/nested" class="nav-link" active-class="active"
 								>Nested</router-link
+							>
+						</li>
+						<li class="nav-item">
+							<router-link to="/my" class="nav-link" active-class="active"
+								>Mypage</router-link
 							>
 						</li>
 					</ul>

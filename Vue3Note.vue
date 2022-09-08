@@ -347,5 +347,64 @@ const goToAbout = () => router.push('/about');
       } );
     - 스토어의 옵션은 크게 state, getters, actions가 있다.
    -->
+<!-- 
+  [ 네비게이션 가드 ]
+    - Vue Router에서 제공하는 기능으로 페이지 이동을 리다이렉션 하거나 취소하여 
+    특정 페이지 진입을 보호하는데 사용된다.
+    - 전역 가드, 라우트 가드, 컴포넌트 내 가드로 3가지 종류가 있다.
 
+    * 전역가드
+      - beforeEach를 사용해 콜백함수를 넣어 선언한다.
+      - return 값으로 false 와 Route Location을 넣을 수 있다.
+        * false: 라우터이동이 일어나지 않는다.
+        * Route Location: 리다이렉션 할 수 있다.
+        
+        < router > index.js >
+    const router = createRouter({~~})
+    
+    router.beforeEach((to, from) => {   // ->  라우터 이동시 무조건 실행된다.
+      if (to.name === 'MyPage') {
+        // return false;     -> 이동하지 않는다.
+        return { name: 'Home' };   -> home으로 리다이렉션한다.
+      }
+    });
+
+    * 라우터 가드
+      - 라우터 정보를 beforeEnter를 사용해 정의한다.
+
+      {
+        path: '/my',
+        name: 'MyPage',
+        component: MyPage,
+        beforeEnter: (to, from) => {
+          console.log('to: ', to);
+          console.log('from: ', from);
+          // return false; //  -> 이동을 하지 않는다.
+          return { name: 'Home' }; -> home으로 리다이렉션한다.
+        },
+      },
+
+      - beforeEnter에는 처리할 내용을 함수화 시켜 배열로 추가할 수 있다.
+        ( 예를들어 쿼리스트링이 넘어왔을때 퀄리 스트링을 제거해주는 규칙 넣기)
+
+      {
+        path: '/my',
+        name: 'MyPage',
+        component: MyPage,
+        beforeEnter: [ removeQueryString, ...규칙 추가 가능 ]
+        },
+      },
+    
+      function removeQueryString(to){
+        if(Object.keys(to.query).length > 0) // 쿼리스트링은 to.query에 들어있고 값이 있다면 Object.keys를 통해 배열로 반환한다.
+        return {path:to.path, query:{}}
+      }
+
+      * 컴포넌트 내 가드 -> PostDetail.vue
+        - onBeforeRouteEnter: 네비게이션 이동이 확정된 후 컴포넌트가 만들어지기 전에 실행 ( setup보다 먼저 실행됨)
+        - onBeforeRouteUpdate: 컴포넌트를 렌더링하는 경로가 변경되면 호출한다. 
+          /user/:id 에서 user/1과 user/2 호출되는 시점에서 실행
+        - onBeforeRouteLeave: 라우트가 떠날때 실행
+
+ -->
 /* eslint-enable */
