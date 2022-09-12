@@ -2,7 +2,11 @@
 	<div>
 		<h2>게시글 목록</h2>
 		<hr class="my-4" />
-		<PostFilter v-model:title="params.title_like" @update:limit="changeLimit">
+		<PostFilter
+			v-model:title="params.title_like"
+			v-model:limit="params._limit"
+			@update:limit="changeLimit"
+		>
 		</PostFilter>
 		<hr class="my-4" />
 

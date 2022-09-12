@@ -1,8 +1,26 @@
 /* eslint-disable */
 <!-- 
   [ 파일 구조 ]
-    - vies: page단위 화면들 저장
+    - layout: 화면을 구성하는 컴포넌트 저장
+    - views: page단위 화면들 저장
     - components: 재사용할 컴포넌트 저장
+    
+    App.vue
+      - TheHeader.vue ( router-link)
+      - TheView.vue (router-view)
+        * HomeView
+        * AboutView
+        * PostListView
+        * PostCreateView
+        * PostDetailView
+        * PostEditView
+        * NotFoundView
+        * NestedView
+          # NestedHomeView
+          # NestedOneView
+          # NestedTwoView
+      - AppAlert.vue
+    
 -->
 
 <!-- 
@@ -48,7 +66,7 @@ const goToAbout = () => router.push('/about');
     -->
 
 <!--  
-  [ 라우터 이동 ( router.push ] _ PostListView.vue
+  [ 라우터 이동 ( router.push ) ] _ PostListView.vue
     - 라우터 이동 시 history항목에 기록한다. 뒤로가기를 했을경우 스택으로 빠짐 
   
   -> router/index.js 파일에서
@@ -82,7 +100,7 @@ const goToAbout = () => router.push('/about');
 <!--
     [ 구조분해 할당 ]
       - 원하는 key 값만 받아오는 것을 의미한다. ( 말그대로 객체 구조를 원하는 key: value로 분해해서 할당하는 것)
-      - ref({})로 선언한 변수에 해 구조분해 할당을 할 수 있다.
+      - ref({})로 선언한 변수에 구조분해 할당을 할 수 있다.
             
            obj = {id:1, title:'vue3', price:100, createdAt:'2022-01-01'}
            const data = ref({})
@@ -210,7 +228,7 @@ const goToAbout = () => router.push('/about');
   [ 커스텀 컴포넌트의 v-model && 다중 v-model && :value, @input  ] _ PostList.vue, PostFilter.vue
     - 커스텀 모델은 자식 컴포넌트에서 부모로부터 받은 props 데이터를 핸들링 하기위해 사용한다.
     - 부모 컴포넌트에서 자식 컴포넌트에 v-model="propsData" 로 넘겨주면 자식컴포넌트는
-      defineProps 영역에 modelValue를 선언하고(다중 v-model이 아닌 경우), defineEmits 영역에 update:propsData를 선언한다.
+      defineProps 영역에 modelValue를 선언하고(다중 v-model이 아닌 경우), defineEmits 영역에 update:modelValue를 선언한다.
     - 주로 input 태그에서 :value부분에 propsData를 사용해 노출하고 @input에 emit을 실행해 값을 핸들링 한다
 
     - 여러개의 props 내려 줄 경우 다중 v-model을 사용하며 v-model:변수명 ="propsData" 를 사용하고
@@ -221,8 +239,8 @@ const goToAbout = () => router.push('/about');
       <template>
         <input
           type="text"
-          :value="foo"
-          @input="$emit('update:foo', $event.target.value)"
+          :value="foo1"
+          @input="$emit('update:foo1', $event.target.value)"
         />
       </template>
 
@@ -235,7 +253,7 @@ const goToAbout = () => router.push('/about');
             type: Stinrg
           }
         })
-        defineEmits(['update:foo'])
+        defineEmits(['update:foo1'])
       </script>
 
       자식 컴포넌트가 부모컴포넌트의 데이터를 v-model로 사용할 경우에 에러가 발생한다.

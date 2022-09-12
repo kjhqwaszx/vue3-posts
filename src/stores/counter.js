@@ -19,7 +19,7 @@ export const useCounterStore = defineStore('counter', {
 			return this.doubleCount + 1;
 		},
 	},
-	//store의 method 역할 함수를 정의 할 때에는 Arrow Function 을 사용하지 않는다.
+	//store의 method 역할, 함수를 정의 할 때에는 Arrow Function 을 사용하지 않는다.
 	// Arrow Func를 사용하게되면 this 접근이 불가능하다.
 	actions: {
 		increment() {
