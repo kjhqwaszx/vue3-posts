@@ -27,7 +27,7 @@ export const useAxios = (url, config = {}) => {
 		// config안에 들어있는 params 는 ref형 변수기 때문에 prams.value 값을 사용해야 한다.
 		// 따라서 unref함수를 통해 일반 변수로 넣어주어야 한다.
 
-		axios(url, {
+		axios(unref(url), {
 			// 중복된 속성은 defaultconfig 다음 config 값으로 덮어씌워진다.
 			// post method를 요청 할 경우 외부에서 넘겨준 config값에 들어있는 post로 설정된다.
 			...defaultConfig,
@@ -47,7 +47,7 @@ export const useAxios = (url, config = {}) => {
 			});
 	};
 
-	if (isRef(config.params)) {
+	if (isRef(config.params) || isRef(url)) {
 		// 외부에서 전달하는 params가 변경될 때마다 이를 감지하고 api를 다시 호출한다. ( 페이징, 검색 필터링 등...)
 		// params가 변경될때마다 재조회가 필요한 경우
 		watchEffect(execute);

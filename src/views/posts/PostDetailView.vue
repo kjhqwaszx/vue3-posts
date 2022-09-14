@@ -56,6 +56,7 @@ import { onBeforeRouteLeave, onBeforeRouteUpdate, useRouter } from 'vue-router';
 import { deletePost } from '@/api/posts';
 import { ref } from 'vue';
 import { useAxios } from '@/composables/useAxios';
+import { computed } from 'vue';
 
 const props = defineProps({
 	id: {
@@ -68,7 +69,10 @@ const router = useRouter();
 const removeError = ref(null);
 const removeLoading = ref(false);
 
-const { data: post, error, loading } = useAxios(`/posts/${props.id}`);
+const url = computed(() => `/posts/${props.id}`);
+const { error, loading, data: post } = useAxios(url);
+
+// const { data: post, error, loading } = useAxios(`/posts/${props.id}`);
 
 // const post = reactive({});
 // const error = ref(null);
